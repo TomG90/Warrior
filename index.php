@@ -76,7 +76,7 @@ class Warrior
         }
 
         $berserkr = $this->lives < self::MAX_LIVES/2;
-        
+
         if ($berserkr) {
             for ($i = 0; $i < 3; $i++) {
                 $chance = rand(1, 6);
