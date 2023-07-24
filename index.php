@@ -62,7 +62,12 @@ class Warrior
 
     public function attack(Warrior $defender): void
     {
-        // not implemented yet
+        $change = rand(1, 6);
+        $demage = $this->attack + $change - $defender->getDefense();
+
+        if ($demage > 0) {
+            $defender->lives -= $demage;
+        }
     }
 
 }
