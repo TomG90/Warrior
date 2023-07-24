@@ -60,13 +60,19 @@ class Warrior
         echo 'Defense: ' . $this->defense . "\n";
     }
 
+    /**
+     * @throws Exception
+     */
     public function attack(Warrior $defender): void
     {
         $change = rand(1, 6);
-        $demage = $this->attack + $change - $defender->getDefense();
+        $damage = $this->attack + $change - $defender->getDefense();
 
-        if ($demage > 0) {
-            $defender->lives -= $demage;
+        if ($damage > 0) {
+            $defender->lives -= $damage;
+        }
+        if ($this->lives <= 0) {
+            throw new Exception('Warrior: ' . $this->name . ' has died.');
         }
     }
 
