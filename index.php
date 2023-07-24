@@ -65,14 +65,23 @@ class Warrior
      */
     public function attack(Warrior $defender): void
     {
-        $change = rand(1, 6);
-        $damage = $this->attack + $change - $defender->getDefense();
+        $chance = rand(1, 6);
+        $damage = $this->attack + $chance - $defender->getDefense();
 
         if ($damage > 0) {
             $defender->lives -= $damage;
         }
         if ($this->lives <= 0) {
             throw new Exception('Warrior: ' . $this->name . ' has died.');
+        }
+
+        $berserkr = $this->lives < self::MAX_LIVES/2;
+        
+        if ($berserkr) {
+            for ($i = 0; $i < 3; $i++) {
+                $chance = rand(1, 6);
+                $damage += $chance;
+            }
         }
     }
 
