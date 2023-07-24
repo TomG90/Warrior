@@ -1,7 +1,5 @@
 <?php
 
-
-
 declare(strict_types=1);
 
 error_reporting(E_ALL);
@@ -10,29 +8,23 @@ set_time_limit(5);
 
 class Warrior
 {
-
+    private string $name;
     const MAX_LIVES = 100;
 
-    /**
-     * @var int
-     **/
-    private $lives;
+    private int $lives;
 
-    /**
-     * @var int
-     **/
-    private $attack;
+    private int $attack;
 
-    /**
-     * @var int
-     **/
-    private $defense;
+    private int $defense;
 
-    public function __construct(int $attack, int $defense)
+
+
+    public function __construct(string $name, int $attack, int $defense)
     {
         $this->lives = self::MAX_LIVES;
         $this->attack = $attack;
         $this->defense = $defense;
+        $this->name = $name;
     }
 
     public function getLives(): int
@@ -50,6 +42,11 @@ class Warrior
         return $this->defense;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
     private function receiveDamage(int $damage): void
     {
         $this->lives -= $damage;
@@ -57,9 +54,10 @@ class Warrior
 
     public function renderInfo(): void
     {
-        echo 'Lives: ' . $this->lives . '<br />';
-        echo 'Attack: ' . $this->attack . '<br />';
-        echo 'Defense: ' . $this->defense . '<br />';
+        echo 'Name: ' . $this->name . "\n";
+        echo 'Lives: ' . $this->lives . "\n";
+        echo 'Attack: ' . $this->attack . "\n";
+        echo 'Defense: ' . $this->defense . "\n";
     }
 
     public function attack(Warrior $defender): void
@@ -68,6 +66,9 @@ class Warrior
     }
 
 }
+
+$warrior = new Warrior('Knight', 20, 10);
+$warrior->renderInfo();
 
 echo "Hello world\n";
 /*
