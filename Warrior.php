@@ -47,7 +47,7 @@ class Warrior
         return $this->name;
     }
 
-    private function receiveDamage(int $damage): void
+    public function receiveDamage(int $damage): void
     {
         $this->lives -= $damage;
     }
@@ -65,8 +65,7 @@ class Warrior
      */
     public function attack(Warrior $defender): void
     {
-        $chance = rand(1, 6);
-        $damage = $this->attack + $chance - $defender->getDefense();
+        $damage = $this->attack + rand(1, 6) - $defender->defense;
 
         if ($damage > 0) {
             $defender->lives -= $damage;
@@ -87,24 +86,14 @@ class Warrior
 
 }
 
-$warrior = new Warrior('Knight', 20, 10);
-$warrior->renderInfo();
 
-echo "Hello world\n";
-/*
-// Example of possible usage after implementation
-
-$warrior1 = new Warrior('Chuck Norris', 40, 10);
-$warrior1->renderInfo();
-
-echo '<h3>VS.</h3>';
-
-$warrior2 = new Warrior('Rambo', 30, 20);
-$warrior2->renderInfo();
+$warrior1 = new Warrior('Chuck Norris', 10, 10);
+$warrior2 = new Warrior('Rambo', 20, 5);
 
 $arena = new Arena();
-$arena->match($warrior1, $warrior2, 5);
+$arena->match($warrior1, $warrior2, 20);
 
 
+/*
 // $ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp php:8.2-cli php your-script.php
 */
